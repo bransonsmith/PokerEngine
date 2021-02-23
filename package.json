@@ -1,0 +1,15 @@
+{
+  "name": "pokerengine",
+  "version": "0.0.1",
+  "description": "Utilities for pokers",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec ./test/**"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.0",
+    "mocha": "^8.3.0"
+  }
+}
