@@ -4,7 +4,7 @@
   "description": "Utilities for pokers",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter spec ./test/**"
+    "test": "mocha --reporter spec ./test/hand_checkers/flush_checker.js"
   },
   "author": "",
   "license": "ISC",

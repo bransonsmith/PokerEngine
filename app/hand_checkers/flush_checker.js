@@ -1,25 +1,37 @@
-const { CARD_VALUES } = require("../cards/card_values");
+var hand_utils = require("../hands/hand_utils");
 
-function getFlush(sortedCards, length=5) {
-    maxFlushVal = null
 
-    for (let i = 0; i <= sortedCards.length - length; i++) {
-        count = 1;
-        for (let j = 1; j < length; j++) {
-            const card = sortedCards[i];
-            const next = sortedCards[i + j]
+function getHand(cardSuitDict, length=5) {
 
-            if (card.suit === next.suit) {
-                count += 1;
-                if (count === length) {
-                    maxFlushVal = next.value;
-                }
-            } else {
-                count = 1;
+    topCards = null;
+    Object.keys(cardSuitDict).forEach(suit => {
+        if (cardSuitDict[suit].length >= length) {
+            byValue = hand_utils.sortByValue(cardSuitDict[suit]);
+            topCards = [];
+
+            for (let i = 0; i < length; i++) {
+                const card = byValue[i];
+                topCards.push(card);
             }
         }
+    });
+
+    return {
+        cardsInHand: topCards,
     }
-    return maxFlushVal;
 }
 
-exports.getFlush = getFlush;
+function compare(flushA, flushB) {
+    for (let i = 0; i < flushA.cardsInHand.length; i++) {
+        const cardA = flushA.cardsInHand[i];
+        const cardB = flushB.cardsInHand[i];
+        if (cardA.value.num !== cardB.value.num) {
+            return cardA.value.num - cardB.value.num;
+        }
+    }
+    return 0;
+}
+
+
+exports.getHand = getHand;
+exports.compare = compare;

@@ -2,7 +2,8 @@ var expect = require("chai").expect;
 var flush_checker = require("../../app/hand_checkers/flush_checker");
 var CARDS = require("../factories/card_list_factory");
 var vals = require("../../app/cards/card_values");
-var CARD = require("../../app/cards/card");
+var card_utils = require("../../app/cards/card_utils");
+var hand_utils = require("../../app/hands/hand_utils");
 
 describe("Flush Checker", function() {
 
@@ -27,8 +28,12 @@ describe("Flush Checker", function() {
 
 function testGetFlushWithCards(test) {
     it(test.name, function() {
-        CARD.printMany(test.cards);
-        straight = flush_checker.getFlush(test.cards);
-        expect(straight).to.equal(test.expected);
+        card_utils.printMany(test.cards);
+        hand = flush_checker.getHand(hand_utils.listToSuitDict(test.cards));
+        topCard = null;
+        if (hand.cardsInHand) {
+            topCard = hand.cardsInHand[0].value;
+        }
+        expect(topCard).to.equal(test.expected);
     });
 }
