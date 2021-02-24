@@ -1,4 +1,4 @@
-var expect    = require("chai").expect;
+var expect = require("chai").expect;
 var straight_checker = require("../../app/hand_checkers/straight_checker");
 var CARDS = require("../factories/card_list_factory");
 var vals = require("../../app/cards/card_values");

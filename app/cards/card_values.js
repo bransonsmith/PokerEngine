@@ -15,4 +15,23 @@ const CARD_VALUES = {
     SMALL_ACE: { num: 1,  char: 'A' },
 }
 
+function getValueByChar(c) {
+    switch (c) {
+        case 'A': return CARD_VALUES.ACE;
+        case 'K': return CARD_VALUES.KING;
+        case 'Q': return CARD_VALUES.QUEEN;
+        case 'J': return CARD_VALUES.JACK;
+        case 'T': return CARD_VALUES.TEN;
+        case '9': return CARD_VALUES.NINE;
+        case '8': return CARD_VALUES.EIGHT;
+        case '7': return CARD_VALUES.SEVEN;
+        case '6': return CARD_VALUES.SIX;
+        case '5': return CARD_VALUES.FIVE;
+        case '4': return CARD_VALUES.FOUR;
+        case '3': return CARD_VALUES.THREE;
+        case '2': return CARD_VALUES.TWO;
+    }
+}
+
 exports.CARD_VALUES = CARD_VALUES;
+exports.getValueByChar = getValueByChar;

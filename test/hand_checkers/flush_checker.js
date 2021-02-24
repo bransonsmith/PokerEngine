@@ -1,9 +1,9 @@
-var expect = require("chai").expect;
 var flush_checker = require("../../app/hand_checkers/flush_checker");
 var CARDS = require("../factories/card_list_factory");
 var vals = require("../../app/cards/card_values");
-var card_utils = require("../../app/cards/card_utils");
 var hand_utils = require("../../app/hands/hand_utils");
+var test_base = require("./hand_checker_test_base");
+var c = require("./../../app/cards/card_factory").c;
 
 describe("Flush Checker", function() {
 
@@ -17,23 +17,27 @@ describe("Flush Checker", function() {
         { name: "returns null for straight",               cards: CARDS.Straight(),                           expected: null },
         { name: "returns null for wheel",                  cards: CARDS.Straight(vals.CARD_VALUES.SMALL_ACE), expected: null },
         { name: "returns null for broadway",               cards: CARDS.Straight(vals.CARD_VALUES.TEN),       expected: null },
-        { name: "returns EIGHT for flush ending in 8",     cards: CARDS.Flush(vals.CARD_VALUES.EIGHT),        expected: vals.CARD_VALUES.EIGHT },
-        { name: "returns ACE for flush ending in A",       cards: CARDS.Flush(vals.CARD_VALUES.ACE),          expected: vals.CARD_VALUES.ACE },
+        { name: "returns EIGHT for flush ending in 8",     cards: CARDS.Flush(vals.CARD_VALUES.EIGHT),
+            expected: [c('8d'), c('7d'), c('6d'), c('4d'), c('3d')]
+        },
+        { name: "returns ACE for flush ending in A",       cards: CARDS.Flush(vals.CARD_VALUES.ACE),
+            expected: [c('Ad'), c('7d'), c('6d'), c('4d'), c('3d')]
+        },
     ];
 
     tests.forEach(test => {
-        testGetFlushWithCards(test);
+        test_base.checkHandGivenCards(test, flush_checker.getHand, hand_utils.listToSuitDict(test.cards));
     });
 });
 
-function testGetFlushWithCards(test) {
-    it(test.name, function() {
-        card_utils.printMany(test.cards);
-        hand = flush_checker.getHand(hand_utils.listToSuitDict(test.cards));
-        topCard = null;
-        if (hand.cardsInHand) {
-            topCard = hand.cardsInHand[0].value;
-        }
-        expect(topCard).to.equal(test.expected);
-    });
-}
+// function testGetFlushWithCards(test) {
+//     it(test.name, function() {
+//         card_utils.printMany(test.cards);
+//         hand = flush_checker.getHand(hand_utils.listToSuitDict(test.cards));
+//         topCard = null;
+//         if (hand.cardsInHand) {
+//             topCard = hand.cardsInHand[0].value;
+//         }
+//         expect(topCard).to.equal(test.expected);
+//     });
+// }

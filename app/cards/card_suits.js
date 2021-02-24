@@ -5,4 +5,15 @@ const CARD_SUITS = {
     SPADES:   { char: 's', unicode: '\u2660', num: 4, str: 'Spades'   },
 }
 
+function getSuitByChar(c) {
+    switch (c) {
+        case 'c': return CARD_SUITS.CLUBS;
+        case 'd': return CARD_SUITS.DIAMONDS;
+        case 'h': return CARD_SUITS.HEARTS;
+        case 's': return CARD_SUITS.SPADES;
+        default: return null;
+    }
+}
+
 exports.CARD_SUITS = CARD_SUITS;
+exports.getSuitByChar = getSuitByChar;

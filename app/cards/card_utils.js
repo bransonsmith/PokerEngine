@@ -3,11 +3,16 @@ function print(card) {
     console.log(toString(card));
 }
 
-function printMany(cards) {
-    str = '\n       ';
-    for (let i = 0; i < cards.length; i++) {
-        const card = cards[i];
-        str += toString(card) + ' ';
+function printMany(cards, prefix='') {
+    
+    str = '       ' + prefix + ' ';
+    if (!cards || cards === null) {
+        str += cards;
+    } else {
+        for (let i = 0; i < cards.length; i++) {
+            const card = cards[i];
+            str += toString(card) + ' ';
+        }
     }
     console.log(str);
 }
