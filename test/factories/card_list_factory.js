@@ -49,28 +49,25 @@ function Straight(startVal=CARD_VALUES.SEVEN, numCards=5) {
     return cards.slice(startVal.num - 1, startVal.num - 1 + numCards);
 }
 
-function Flush(suit=CARD_SUITS.DIAMONDS, startVal=CARD_VALUES.TWO, numCards=5) {
+function Flush(endVal=CARD_VALUES.ACE, suit=CARD_SUITS.DIAMONDS, numCards=5) {
     cards = [
-        { suit: suit, value: CARD_VALUES.SMALL_ACE },
         { suit: suit, value: CARD_VALUES.TWO },
         { suit: suit, value: CARD_VALUES.THREE },
         { suit: suit, value: CARD_VALUES.FOUR },
-        { suit: suit, value: CARD_VALUES.FIVE },
         { suit: suit, value: CARD_VALUES.SIX },
         { suit: suit, value: CARD_VALUES.SEVEN },
         { suit: suit, value: CARD_VALUES.EIGHT },
-        { suit: suit, value: CARD_VALUES.NINE },
         { suit: suit, value: CARD_VALUES.TEN },
         { suit: suit, value: CARD_VALUES.JACK },
         { suit: suit, value: CARD_VALUES.QUEEN },
-        { suit: suit, value: CARD_VALUES.KING },
         { suit: suit, value: CARD_VALUES.ACE },
     ];
     chosenCards = []
-    for (let i = 1; i < cards.length && chosenCards.length < numCards; i+=1.5) {
-        const card = cards[Math.floor(i)];
+    for (let i = 1; i < numCards; i++) {
+        const card = cards[i];
         chosenCards.push(card);
     }
+    chosenCards.push({ suit: suit, value: endVal });
     return chosenCards;
 }
 
