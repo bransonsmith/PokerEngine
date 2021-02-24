@@ -4,21 +4,22 @@ function print(card) {
 }
 
 function printMany(cards, prefix='') {
-    
-    str = '       ' + prefix + ' ';
-    if (!cards || cards === null) {
-        str += cards;
-    } else {
-        for (let i = 0; i < cards.length; i++) {
-            const card = cards[i];
-            str += toString(card) + ' ';
-        }
+    str = '\033[40m\033[37m       ' + prefix + ' ';
+    if (cards === null) { console.log(str + 'null'); return; }
+    for (let i = 0; i < cards.length; i++) {
+        const card = cards[i];
+        str += toString(card) + ' \033[40m\033[37m';
     }
     console.log(str);
 }
 
 function toString(card) {
-    return `${card.value.char}${card.suit.unicode}`
+    str = `${card.value.char}${card.suit.unicode}`
+    if (card.suit.char === 'd' || card.suit.char === 'h') {
+        return '\033[47m\x1B[31m' + str;
+    } else {
+        return '\033[47m\033[30m' + str;
+    }
 }
 
 function compareByValue(cardA, cardB) {
