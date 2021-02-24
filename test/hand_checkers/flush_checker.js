@@ -29,15 +29,3 @@ describe("Flush Checker", function() {
         test_base.checkHandGivenCards(test, flush_checker.getHand, hand_utils.listToSuitDict(test.cards));
     });
 });
-
-// function testGetFlushWithCards(test) {
-//     it(test.name, function() {
-//         card_utils.printMany(test.cards);
-//         hand = flush_checker.getHand(hand_utils.listToSuitDict(test.cards));
-//         topCard = null;
-//         if (hand.cardsInHand) {
-//             topCard = hand.cardsInHand[0].value;
-//         }
-//         expect(topCard).to.equal(test.expected);
-//     });
-// }
