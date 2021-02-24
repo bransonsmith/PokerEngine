@@ -4,7 +4,7 @@ function print(card) {
 }
 
 function printMany(cards) {
-    str = '\n           ';
+    str = '\n       ';
     for (let i = 0; i < cards.length; i++) {
         const card = cards[i];
         str += toString(card) + ' ';
