@@ -29,9 +29,9 @@ function Quads(val=CARD_VALUES.ACE) {
              { suit: CARD_SUITS.HEARTS, value: val }, { suit: CARD_SUITS.SPADES,  value: val }];
 }
 
-function Straight(numCards=5, startVal=CARD_VALUES.SEVEN) {
+function Straight(startVal=CARD_VALUES.SEVEN, numCards=5) {
     cards = [
-        { suit: CARD_SUITS.DIAMONDS, value: CARD_VALUES.ACE },
+        { suit: CARD_SUITS.DIAMONDS, value: CARD_VALUES.SMALL_ACE },
         { suit: CARD_SUITS.HEARTS  , value: CARD_VALUES.TWO },
         { suit: CARD_SUITS.SPADES  , value: CARD_VALUES.THREE },
         { suit: CARD_SUITS.CLUBS   , value: CARD_VALUES.FOUR },
@@ -49,9 +49,9 @@ function Straight(numCards=5, startVal=CARD_VALUES.SEVEN) {
     return cards.slice(startVal.num - 1, startVal.num - 1 + numCards);
 }
 
-function Flush(numCards=5, suit=CARD_SUITS.DIAMONDS, startVal=CARD_VALUES.TWO) {
+function Flush(suit=CARD_SUITS.DIAMONDS, startVal=CARD_VALUES.TWO, numCards=5) {
     cards = [
-        { suit: suit, value: CARD_VALUES.ACE },
+        { suit: suit, value: CARD_VALUES.SMALL_ACE },
         { suit: suit, value: CARD_VALUES.TWO },
         { suit: suit, value: CARD_VALUES.THREE },
         { suit: suit, value: CARD_VALUES.FOUR },
@@ -66,7 +66,12 @@ function Flush(numCards=5, suit=CARD_SUITS.DIAMONDS, startVal=CARD_VALUES.TWO) {
         { suit: suit, value: CARD_VALUES.KING },
         { suit: suit, value: CARD_VALUES.ACE },
     ];
-    return cards.slice(startVal.num - 1, startVal.num - 1 + numCards);
+    chosenCards = []
+    for (let i = 1; i < cards.length && chosenCards.length < numCards; i+=1.5) {
+        const card = cards[Math.floor(i)];
+        chosenCards.push(card);
+    }
+    return chosenCards;
 }
 
 exports.EmptyCardList = EmptyCardList;
